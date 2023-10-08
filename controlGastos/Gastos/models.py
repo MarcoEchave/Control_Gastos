@@ -12,3 +12,9 @@ class Categoria(models.Model):
 
     def __str__(self):
         return self.categoria
+    
+class Tipo(models.Model):
+    tipo=models.CharField("Tipo",max_length=50)
+
+    def __str__(self):
+        return self.tipo
