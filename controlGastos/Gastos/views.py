@@ -11,7 +11,7 @@ class getBanco(ListView):
     template_name = 'banco/getBanco.html'
     model = Banco
     context_object_name = 'banco'
-    paginate_by=2
+    #paginate_by=2
 
     #def get_queryset(self):
     #    palabra_clave = self.request.GET.get("kword", '')
@@ -33,12 +33,13 @@ class DeleteBanco(DeleteView):
 ##Tipo
 class getTipo(ListView):
     template_name = 'tipo/getTipo.html'
+    model = Tipo
     context_object_name = 'tipo'
 
-    def get_queryset(self):
-        palabra_clave = self.request.GET.get("kword", '')
-        lista = Banco.objects.get(id=1)       
-        return lista
+    #def get_queryset(self):
+    #    palabra_clave = self.request.GET.get("kword", '')
+    #    lista = Banco.objects.get(id=1)       
+    #    return lista
     
 class CreateTipo(CreateView):
     template_name='tipo/createTipo.html'
@@ -55,12 +56,13 @@ class DeleteTipo(DeleteView):
 #Categoria
 class getCategoria(ListView):
     template_name = 'categoria/getCategoria.html'
+    model= Categoria
     context_object_name = 'categoria'
 
-    def get_queryset(self):
-        palabra_clave = self.request.GET.get("kword", '')
-        lista = Banco.objects.get(id=1)       
-        return lista
+    #def get_queryset(self):
+    #    palabra_clave = self.request.GET.get("kword", '')
+    #    lista = Banco.objects.get(id=1)       
+    #    return lista
     
 class CreateCategoria(CreateView):
     template_name='categoria/createCategoria.html'
