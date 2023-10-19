@@ -6,13 +6,25 @@
     <title>Document</title>
 </head>
 <body>
-    <ul>
-        {% for e in tipo  %}
-        <li>{{e.tipo}}</li>
-        {% endfor %}
-    
-    
-    </ul>
+    <h1>Lista de Tipos</h1>
+    <table style="border:1">
+        <thead>
+            <tr>
+                <td>Tipo</td>
+                <td></td>
+                <td></td>
+            </tr>
+        </thead>
+        <tbody>
+            {% for e in tipo  %}
+            <tr>
+                <td>{{e.tipo}}</td>
+                <td><a href="">Eliminar</a></td>
+                <td><a href="">Editar</a></td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
     
 </body>
 </html>

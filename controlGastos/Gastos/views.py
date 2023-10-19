@@ -1,22 +1,17 @@
 from typing import Any
-from django.shortcuts import render
+from django.shortcuts import render,redirect
 from django.db.models.query import QuerySet
 from django.views.generic import (ListView,DetailView,CreateView,TemplateView,UpdateView,DeleteView)
 
 from .models import Banco,Tipo,Categoria
 
+from .forms import FormsCategoria
+
 # Create your views here.
 
-class getBanco(ListView):
-    template_name = 'banco/getBanco.html'
-    model = Banco
-    context_object_name = 'banco'
-    #paginate_by=2
-
-    #def get_queryset(self):
-    #    palabra_clave = self.request.GET.get("kword", '')
-    #    lista = Banco.objects.get(id=1)       
-    #    return lista
+def getbanco(request):
+    banco = Banco.objects.all()
+    return render(request,'banco/getBanco.html',{'banco':banco})
     
 class CreateBanco(CreateView):
     template_name='banco/createBanco.html'
@@ -31,15 +26,10 @@ class DeleteBanco(DeleteView):
     context_object_name='deleteBanco'
 
 ##Tipo
-class getTipo(ListView):
-    template_name = 'tipo/getTipo.html'
-    model = Tipo
-    context_object_name = 'tipo'
-
-    #def get_queryset(self):
-    #    palabra_clave = self.request.GET.get("kword", '')
-    #    lista = Banco.objects.get(id=1)       
-    #    return lista
+def getTipo(request):
+    tipo = Tipo.objects.all()
+    return render(request,'tipo/getTipo.html',{'tipo':tipo})
+    
     
 class CreateTipo(CreateView):
     template_name='tipo/createTipo.html'
@@ -54,20 +44,20 @@ class DeleteTipo(DeleteView):
     context_object_name='deleteTipo'
 
 #Categoria
-class getCategoria(ListView):
-    template_name = 'categoria/getCategoria.html'
-    model= Categoria
-    context_object_name = 'categoria'
+def getCategoria(request):
+    categoria= Categoria.objects.all()
+    return render(request,'categoria/getCategoria.html',{'categoria':categoria})
 
-    #def get_queryset(self):
-    #    palabra_clave = self.request.GET.get("kword", '')
-    #    lista = Banco.objects.get(id=1)       
-    #    return lista
+def create_categoria(request):
+    if request.method == 'POST':
+        form = FormsCategoria(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('getCategoria')
+    else:
+        form = FormsCategoria()
+    return render(request, 'categoria/create-categoria.html', {'form': form})
     
-class CreateCategoria(CreateView):
-    template_name='categoria/createCategoria.html'
-    context_object_name='createCategoria'
-
 class UpdateCategoria(UpdateView):
     template_name='categoria/updateCategoria.html'
     context_object_name='updateCategoria'
