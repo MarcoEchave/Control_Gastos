@@ -1,11 +1,11 @@
 from typing import Any
 from django.shortcuts import render,redirect
 from django.db.models.query import QuerySet
-from django.views.generic import (ListView,DetailView,CreateView,TemplateView,UpdateView,DeleteView)
+from django.views.generic import (UpdateView,DeleteView)
 
 from .models import Banco,Tipo,Categoria
 
-from .forms import FormsCategoria
+from .forms import FormsCategoria,FormsTipo,FormsBanco
 
 # Create your views here.
 
@@ -13,9 +13,15 @@ def getbanco(request):
     banco = Banco.objects.all()
     return render(request,'banco/getBanco.html',{'banco':banco})
     
-class CreateBanco(CreateView):
-    template_name='banco/createBanco.html'
-    context_object_name='createBanco'
+def create_banco(request):
+    if request.method == 'POST':
+        form = FormsBanco(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('getBanco')
+    else:
+        form = FormsBanco()
+    return render(request, 'banco/create-banco.html', {'form': form})
 
 class UpdateBanco(UpdateView):
     template_name='banco/updateBanco.html'
@@ -31,9 +37,15 @@ def getTipo(request):
     return render(request,'tipo/getTipo.html',{'tipo':tipo})
     
     
-class CreateTipo(CreateView):
-    template_name='tipo/createTipo.html'
-    context_object_name='createTipo'
+def create_tipo(request):
+    if request.method == 'POST':
+        form = FormsTipo(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('createTipo')
+    else:
+        form = FormsTipo()
+    return render(request, 'tipo/create-tipo.html', {'form': form})
 
 class UpdateTipo(UpdateView):
     template_name='tipo/updateTipo.html'
