@@ -2,6 +2,7 @@ from typing import Any
 from django.shortcuts import render,redirect
 from django.db.models.query import QuerySet
 from django.views.generic import (UpdateView,DeleteView)
+from django.urls import reverse_lazy
 
 from .models import Banco,Tipo,Categoria
 
@@ -30,6 +31,7 @@ class UpdateBanco(UpdateView):
 class DeleteBanco(DeleteView):
     template_name='banco/deleteBanco.html'
     context_object_name='deleteBanco'
+    success_url = reverse_lazy('getBanco')
 
 ##Tipo
 def getTipo(request):
@@ -54,6 +56,8 @@ class UpdateTipo(UpdateView):
 class DeleteTipo(DeleteView):
     template_name='tipo/deleteTipo.html'
     context_object_name='deleteTipo'
+    model = Tipo
+    success_url = reverse_lazy('getTipo')
 
 #Categoria
 def getCategoria(request):
@@ -76,4 +80,5 @@ class UpdateCategoria(UpdateView):
 
 class DeleteCategoria(DeleteView):
     template_name='categoria/deleteCategoria.html'
-    context_object_name='deletecategoria'
+    model = Categoria
+    success_url = reverse_lazy('getCategoria')

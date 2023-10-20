@@ -6,9 +6,11 @@
     <title>Document</title>
 </head>
 <body>
-    <form method="POST">
-        <h4>¿Desea eliminar este movimiento?</h4>
-        <button type="submit">Eliminar</button>
+    <h1>Crear Banco</h1>
+    <form method='POST'>{% csrf_token %}
+        {{form.as_p}}
+        <input type='submit' value='Guardar'>
     </form>
+    
 </body>
 </html>
