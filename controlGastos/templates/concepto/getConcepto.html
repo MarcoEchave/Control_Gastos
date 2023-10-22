@@ -6,7 +6,7 @@
     <title>Document</title>
 </head>
 <body>
-    <a href="{%url 'createCategoria'%}">Nuevo</a>
+    <a href="{%url 'createConcepto' %}">Nuevo</a>
     <h1>Lista de Conceptos</h1>
     <table style="border:1">
         <thead>
@@ -22,7 +22,7 @@
             <tr>
                 <td>{{e.concepto}}</td>
                 <td>{{e.id_categoria}}</td>
-                <td><a href="">Eliminar</a></td>
+                <td><a href="{% url 'deleteConcepto' e.id%}">Eliminar</a></td>
                 <td><a href="">Editar</a></td>
             </tr>
             {% endfor %}

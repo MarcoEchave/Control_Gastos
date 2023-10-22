@@ -1,16 +1,17 @@
 from django import forms
 
-from .model import Movimiento, Concepto
+from .models import Movimiento, Concepto
 
 
 class FormMovimiento(forms.ModelForm):
     class Meta:
         model = Movimiento
-        fields = ('fecha',"concepto","monto","banco")
+        fields = ('fecha',"id_concepto","monto","banco","tipo")
         widgets = {"monto":forms.NumberInput(),"fecha":forms.DateInput()}
 
 
 class FormConcepto(forms.ModelForm):
-    model=Concepto
-    fields =("concepto","categoria")
+    class Meta:
+        model=Concepto
+        fields =("concepto","id_categoria")
     

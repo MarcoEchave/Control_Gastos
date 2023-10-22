@@ -29,8 +29,8 @@ class UpdateBanco(UpdateView):
     context_object_name='updateBanco'
 
 class DeleteBanco(DeleteView):
-    template_name='banco/deleteBanco.html'
-    context_object_name='deleteBanco'
+    template_name='banco/delete-banco.html'
+    model=Banco
     success_url = reverse_lazy('getBanco')
 
 ##Tipo
@@ -44,7 +44,7 @@ def create_tipo(request):
         form = FormsTipo(request.POST)
         if form.is_valid():
             form.save()
-            return redirect('createTipo')
+            return redirect('getTipo')
     else:
         form = FormsTipo()
     return render(request, 'tipo/create-tipo.html', {'form': form})
@@ -54,8 +54,7 @@ class UpdateTipo(UpdateView):
     context_object_name='updateTipo'
 
 class DeleteTipo(DeleteView):
-    template_name='tipo/deleteTipo.html'
-    context_object_name='deleteTipo'
+    template_name='tipo/delete-tipo.html'
     model = Tipo
     success_url = reverse_lazy('getTipo')
 
@@ -79,6 +78,6 @@ class UpdateCategoria(UpdateView):
     context_object_name='updateCategoria'
 
 class DeleteCategoria(DeleteView):
-    template_name='categoria/deleteCategoria.html'
+    template_name='categoria/delete-categoria.html'
     model = Categoria
     success_url = reverse_lazy('getCategoria')

@@ -12,7 +12,7 @@
 </style>
 <body>
     <a href="{%url 'createBanco'%}">Nuevo</a>
-    <h1>Lista de Categorias</h1>
+    <h1>Lista de Bancos</h1>
     <table>
         <thead>
             <tr>
@@ -25,7 +25,7 @@
             {% for e in banco  %}
             <tr>
                 <td>{{e.banco}}</td>
-                <td><a href="">Eliminar</a></td>
+                <td><a href="{%url 'deleteBanco' e.id%}">Eliminar</a></td>
                 <td><a href="">Editar</a></td>
             </tr>
             {% endfor %}

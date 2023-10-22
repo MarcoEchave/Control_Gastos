@@ -6,8 +6,8 @@
     <title>Document</title>
 </head>
 <body>
-    <a href="{%url 'createCategoria'%}">Nuevo</a>
-    <h1>Lista de Conceptos</h1>
+    <a href="{%url 'createMovimientos'%}">Nuevo</a>
+    <h1>Lista de Movimientos</h1>
     <table style="border:1">
         <thead>
             <tr>
@@ -26,7 +26,7 @@
                 <td>{{e.id_concepto}}</td>
                 <td>{{e.monto}}</td>
                 <td>{{e.banco}}</td>
-                <td><a href="">Eliminar</a></td>
+                <td><a href="{% url 'deleteMovimientos' e.id%}">Eliminar</a></td>
                 <td><a href="">Editar</a></td>
             </tr>
             {% endfor %}

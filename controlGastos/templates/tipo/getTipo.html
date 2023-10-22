@@ -20,7 +20,7 @@
             {% for e in tipo  %}
             <tr>
                 <td>{{e.tipo}}</td>
-                <td><a href="">Eliminar</a></td>
+                <td><a href="{% url 'delete-Tipo' e.id%}">Eliminar</a></td>
                 <td><a href="">Editar</a></td>
             </tr>
             {% endfor %}
