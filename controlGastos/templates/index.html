@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{
+            margin:0;
+
+        }
+        header{
+            background-color: #cfe8fd;
+            padding:20px
+        }
+        ul{
+            display:flex;
+            text-decoration:none;
+            color: #fff;
+
+        }
+        ul .left{
+            display:flex;
+            align-items:flex-start;
+        }
+        ul .rigth{
+            display:flex;
+            align-items:flex-end;
+        }
+        li{
+            list-style:none;
+            margin: 5px;
+            
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+    <ul>
+        <div class="left">
+            <li><a href="{%url 'getCategoria' %}">Categoria</a></li>
+            <li><a href="{%url 'getBanco' %}">Banco</a></li>
+            <li><a href="{%url 'getTipo' %}">Tipo</a></li>        
+            <li><a href="{%url 'getMovimientos' %}">Movimientos</a></li>
+            <li><a href="{%url 'getConcepto' %}">Concepto</a></li>
+        </div>
+        <div class="rigth">
+            <li><a href="{% url 'user-logout' %}">Cerrar Sesion</a></li>
+            <li><a href="{% url 'user-update' %}">Actualizar Datos</a></li>
+        <div>
+    </ul>
+</nav>
+</header>
+    {% block cuerpo %}
+        
+    {% endblock cuerpo %}
+</body>
+</html>
