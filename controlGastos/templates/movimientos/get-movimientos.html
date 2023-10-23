@@ -1,37 +1,29 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    <a href="{%url 'createMovimientos'%}">Nuevo</a>
-    <h1>Lista de Movimientos</h1>
-    <table style="border:1">
-        <thead>
-            <tr>
-                <td>Fecha</td>
-                <td>Concepto</td>
-                <td>Monto</td>
-                <td>Banco</td>
-                <td></td>
-                <td></td>
-            </tr>
-        </thead>
-        <tbody>
-            {% for e in movimiento  %}
-            <tr>
-                <td>{{e.fecha}}</td>
-                <td>{{e.id_concepto}}</td>
-                <td>{{e.monto}}</td>
-                <td>{{e.banco}}</td>
-                <td><a href="{% url 'deleteMovimientos' e.id%}">Eliminar</a></td>
-                <td><a href="">Editar</a></td>
-            </tr>
-            {% endfor %}
-        </tbody>
-    </table>
-    
-</body>
-</html>
+{% extends 'index.html' %}
+{% block cuerpo %}
+<a href="{%url 'createMovimientos'%}">Nuevo</a>
+<h1>Lista de Movimientos</h1>
+<table style="border:1">
+    <thead>
+        <tr>
+            <td>Fecha</td>
+            <td>Concepto</td>
+            <td>Monto</td>
+            <td>Banco</td>
+            <td></td>
+            <td></td>
+        </tr>
+    </thead>
+    <tbody>
+        {% for e in movimiento  %}
+        <tr>
+            <td>{{e.fecha}}</td>
+            <td>{{e.id_concepto}}</td>
+            <td>{{e.monto}}</td>
+            <td>{{e.banco}}</td>
+            <td><a href="{% url 'deleteMovimientos' e.id%}">Eliminar</a></td>
+            <td><a href="">Editar</a></td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock cuerpo %}

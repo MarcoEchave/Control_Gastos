@@ -1,16 +1,5 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<style>
-    td{
-        border: 1px solid black;
-    }
-</style>
-<body>
+{% extends "index.html" %}
+{% block cuerpo %}
     <a href="{%url 'createBanco'%}">Nuevo</a>
     <h1>Lista de Bancos</h1>
     <table>
@@ -31,6 +20,4 @@
             {% endfor %}
         </tbody>
     </table>
-    
-</body>
-</html>
+{% endblock cuerpo%}
