@@ -25,8 +25,10 @@ def create_banco(request):
     return render(request, 'banco/create-banco.html', {'form': form})
 
 class UpdateBanco(UpdateView):
-    template_name='banco/updateBanco.html'
-    context_object_name='updateBanco'
+    template_name='banco/update-banco.html'
+    model = Banco
+    fields = ['banco']
+    success_url = reverse_lazy("getCategoria")
 
 class DeleteBanco(DeleteView):
     template_name='banco/delete-banco.html'
@@ -50,8 +52,10 @@ def create_tipo(request):
     return render(request, 'tipo/create-tipo.html', {'form': form})
 
 class UpdateTipo(UpdateView):
-    template_name='tipo/updateTipo.html'
-    context_object_name='updateTipo'
+    template_name='tipo/update-tipo.html'
+    model = Tipo
+    fields = ['tipo']
+    success_url = reverse_lazy("getCategoria")
 
 class DeleteTipo(DeleteView):
     template_name='tipo/delete-tipo.html'
@@ -74,8 +78,10 @@ def create_categoria(request):
     return render(request, 'categoria/create-categoria.html', {'form': form})
     
 class UpdateCategoria(UpdateView):
-    template_name='categoria/updateCategoria.html'
-    context_object_name='updateCategoria'
+    template_name='categoria/update-categoria.html'
+    model = Categoria
+    fields = ['categoria']
+    success_url = reverse_lazy("getCategoria")
 
 class DeleteCategoria(DeleteView):
     template_name='categoria/delete-categoria.html'

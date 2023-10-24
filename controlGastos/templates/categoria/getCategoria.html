@@ -15,7 +15,7 @@
         <tr>
             <td>{{e.categoria}}</td>
             <td><a href="{% url  'deleteCategoria' e.id  %}">Eliminar</a></td>
-            <td><a href="">Editar</a></td>
+            <td><a href="{% url  'updateCategoria' e.id  %}">Editar</a></td>
         </tr>
         {% endfor %}
     </tbody>
