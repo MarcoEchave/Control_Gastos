@@ -18,7 +18,7 @@
             <td>{{e.concepto}}</td>
             <td>{{e.id_categoria}}</td>
             <td><a href="{% url 'deleteConcepto' e.id%}">Eliminar</a></td>
-            <td><a href="">Editar</a></td>
+            <td><a href="{% url 'updateConcepto' e.id%}">Editar</a></td>
         </tr>
         {% endfor %}
     </tbody>
