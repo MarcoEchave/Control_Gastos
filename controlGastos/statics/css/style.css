@@ -1,0 +1,17 @@
+.login{
+    display: flex;
+    flex-direction: column;
+    margin: 15px;
+    align-items: center;
+    font-size: 20px;    
+}
+
+.login button {
+    font-size: 15px;
+    padding: 6px;
+    background-color: #0f0;
+    width: 100%;
+    margin-bottom: 10px;
+    border-radius: 12px;
+    border:none;
+}

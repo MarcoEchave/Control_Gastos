@@ -27,12 +27,17 @@ def create_banco(request):
         form = FormsBanco()
     return render(request, 'banco/create-banco.html', {'form': form})
 
-class UpdateBanco(LoginRequiredMixin,UpdateView):
-    template_name='banco/update-banco.html'
-    model = Banco
-    fields = ['banco']
-    success_url = reverse_lazy("getCategoria")
-    login_url = reverse_lazy("user-login")
+@login_required
+def update_banco(request, pk):
+    banco = get_object_or_404(Banco, pk=pk)
+    if request.method == 'POST':
+        form = FormsBanco(request.POST, instance=banco)
+        if form.is_valid():
+            form.save()
+            return redirect('getBanco')
+    else:
+        form = FormsBanco(instance=banco)
+    return render(request, 'banco/update-banco.html', {'form': form, 'banco': banco})
 
 class DeleteBanco(LoginRequiredMixin,DeleteView):
     template_name='banco/delete-banco.html'
@@ -56,11 +61,17 @@ def create_tipo(request):
         form = FormsTipo()
     return render(request, 'tipo/create-tipo.html', {'form': form})
 
-class UpdateTipo(LoginRequiredMixin,UpdateView):
-    template_name='tipo/update-tipo.html'
-    model = Tipo
-    fields = ['tipo']
-    success_url = reverse_lazy("getCategoria")
+@login_required
+def update_tipo(request, pk):
+    tipo = get_object_or_404(Tipo, pk=pk)
+    if request.method == 'POST':
+        form = FormsTipo(request.POST, instance=tipo)
+        if form.is_valid():
+            form.save()
+            return redirect('getTipo')
+    else:
+        form = FormsTipo(instance=tipo)
+    return render(request, 'tipo/update-tipo.html', {'form': form, 'tipo': tipo})
 
 class DeleteTipo(LoginRequiredMixin,DeleteView):
     template_name='tipo/delete-tipo.html'
@@ -84,11 +95,17 @@ def create_categoria(request):
         form = FormsCategoria()
     return render(request, 'categoria/create-categoria.html', {'form': form})
     
-class UpdateCategoria(LoginRequiredMixin,UpdateView):
-    template_name='categoria/update-categoria.html'
-    model = Categoria
-    fields = ['categoria']
-    success_url = reverse_lazy("getCategoria")
+@login_required
+def update_categoria(request, pk):
+    categoria = get_object_or_404(Categoria, pk=pk)
+    if request.method == 'POST':
+        form = FormsCategoria(request.POST, instance=categoria)
+        if form.is_valid():
+            form.save()
+            return redirect('getCategoria')
+    else:
+        form = FormsCategoria(instance=categoria)
+    return render(request, 'categoria/update-categoria.html', {'form': form, 'categoria': categoria})
 
 class DeleteCategoria(LoginRequiredMixin,DeleteView):
     template_name='categoria/delete-categoria.html'
