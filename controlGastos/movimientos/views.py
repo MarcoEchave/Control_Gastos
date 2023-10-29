@@ -4,6 +4,7 @@ from django.urls import reverse_lazy
 from django.shortcuts import redirect
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.decorators import login_required
+from django.core.paginator import Paginator
 
 from .models import Concepto, Movimiento
 from .forms import FormConcepto, FormMovimiento
@@ -12,7 +13,10 @@ from .forms import FormConcepto, FormMovimiento
 @login_required
 def getConcepto(request):
     concepto = Concepto.objects.all()
-    return render(request,'concepto/getConcepto.html',{'concepto':concepto})
+    page = request.GET.get('page',1)
+    paginator = Paginator(concepto,5)
+    concepto = paginator.page(page)
+    return render(request,'concepto/getConcepto.html',{'concepto':concepto,'paginator':paginator})
 
 @login_required    
 def create_concepto(request):
@@ -38,16 +42,22 @@ def update_concepto(request, pk):
         form = FormConcepto(instance=concepto)
     return render(request, 'concepto/update-concepto.html', {'form': form, 'concepto': concepto})
 
-class DeleteConcepto(LoginRequiredMixin,DeleteView):
-    template_name= 'concepto/delete-concepto.html'
-    model =Concepto
-    success_url = reverse_lazy('getConcepto')
+@login_required
+def eliminar_concepto(request, pk):
+    concepto = get_object_or_404(Concepto, pk=pk)
+    if request.method == 'POST':
+        concepto.delete()
+        return redirect('getConcepto')
+    return render(request, 'concepto/delete-concepto.html', {'concepto': concepto})
 #Movimiento
 
 @login_required
 def getMovimiento(request):
     movimiento = Movimiento.objects.all()
-    return render(request,'movimientos/get-movimientos.html',{'movimiento':movimiento})
+    page = request.GET.get('page',1)
+    paginator = Paginator(movimiento,5)
+    movimiento = paginator.page(page)
+    return render(request,'movimientos/get-movimientos.html',{'movimiento':movimiento,'paginator':paginator})
 
 @login_required    
 def create_movimiento(request):
@@ -72,7 +82,10 @@ def update_movimiento(request, pk):
         form = FormConcepto(instance=movimiento)
     return render(request, 'movimiento/update-movimiento.html', {'form': form, 'movimiento': movimiento})
 
-class DeleteMovimiento(LoginRequiredMixin,DeleteView):
-    template_name = 'movimientos/delete-movimiento.html'
-    model= Movimiento
-    success_url = reverse_lazy('getMovimientos')
+@login_required
+def eliminar_movimiento(request, pk):
+    movimimiento = get_object_or_404(Movimiento, pk=pk)
+    if request.method == 'POST':
+        movimimiento.delete()
+        return redirect('getMovimientos')
+    return render(request, 'movimientos/delete-movimiento.html', {'movimiento': movimimiento})

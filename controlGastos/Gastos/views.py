@@ -4,6 +4,7 @@ from django.views.generic import (DeleteView)
 from django.urls import reverse_lazy
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.decorators import login_required
+from django.core.paginator import Paginator
 
 from .models import Banco,Tipo,Categoria
 
@@ -14,7 +15,10 @@ from .forms import FormsCategoria,FormsTipo,FormsBanco
 #@permission_required('')
 def getbanco(request):
     banco = Banco.objects.all()
-    return render(request,'banco/getBanco.html',{'banco':banco})
+    page = request.GET.get('page',1)
+    paginator = Paginator(banco,5)
+    banco = paginator.page(page)
+    return render(request,'banco/getBanco.html',{'banco':banco,'paginator':paginator})
 
 @login_required   
 def create_banco(request):
@@ -39,16 +43,22 @@ def update_banco(request, pk):
         form = FormsBanco(instance=banco)
     return render(request, 'banco/update-banco.html', {'form': form, 'banco': banco})
 
-class DeleteBanco(LoginRequiredMixin,DeleteView):
-    template_name='banco/delete-banco.html'
-    model=Banco
-    success_url = reverse_lazy('getBanco')
+@login_required
+def eliminar_banco(request, pk):
+    banco = get_object_or_404(Banco, pk=pk)
+    if request.method == 'POST':
+        banco.delete()
+        return redirect('getBanco')
+    return render(request, 'banco/delete-banco.html', {'banco': banco})
 
 ##Tipo
 @login_required 
 def getTipo(request):
     tipo = Tipo.objects.all()
-    return render(request,'tipo/getTipo.html',{'tipo':tipo})
+    page = request.GET.get('page',1)
+    paginator = Paginator(tipo,5)
+    tipo = paginator.page(page)
+    return render(request,'tipo/getTipo.html',{'tipo':tipo,'paginator':paginator})
     
 @login_required  
 def create_tipo(request):
@@ -73,16 +83,22 @@ def update_tipo(request, pk):
         form = FormsTipo(instance=tipo)
     return render(request, 'tipo/update-tipo.html', {'form': form, 'tipo': tipo})
 
-class DeleteTipo(LoginRequiredMixin,DeleteView):
-    template_name='tipo/delete-tipo.html'
-    model = Tipo
-    success_url = reverse_lazy('getTipo')
+@login_required
+def eliminar_tipo(request, pk):
+    tipo = get_object_or_404(Tipo, pk=pk)
+    if request.method == 'POST':
+        tipo.delete()
+        return redirect('getTipo')
+    return render(request, 'tipo/delete-tipo.html', {'tipo': tipo})
 
 #Categoria
 @login_required
 def getCategoria(request):
     categoria= Categoria.objects.all()
-    return render(request,'categoria/getCategoria.html',{'categoria':categoria})
+    page = request.GET.get('page',1)
+    paginator = Paginator(categoria,5)
+    categoria = paginator.page(page)
+    return render(request,'categoria/getCategoria.html',{'categoria':categoria,'paginator':paginator})
 
 @login_required
 def create_categoria(request):
@@ -107,7 +123,10 @@ def update_categoria(request, pk):
         form = FormsCategoria(instance=categoria)
     return render(request, 'categoria/update-categoria.html', {'form': form, 'categoria': categoria})
 
-class DeleteCategoria(LoginRequiredMixin,DeleteView):
-    template_name='categoria/delete-categoria.html'
-    model = Categoria
-    success_url = reverse_lazy('getCategoria')
+@login_required
+def eliminar_categoria(request, pk):
+    categoria = get_object_or_404(Categoria, pk=pk)
+    if request.method == 'POST':
+        categoria.delete()
+        return redirect('getCategoria')
+    return render(request, 'categoria/delete-categoria.html', {'categoria': categoria})

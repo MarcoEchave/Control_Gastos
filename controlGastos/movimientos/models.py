@@ -15,7 +15,7 @@ class Concepto(models.Model):
 class Movimiento(models.Model):
     fecha=models.DateField("Fecha", blank=True, null=False)
     id_concepto=models.ForeignKey(Concepto,on_delete=models.CASCADE)
-    monto=models.DecimalField("Monto",max_digits=6,decimal_places=2)
+    monto=models.DecimalField("Monto",max_digits=8,decimal_places=2)
     banco=models.ForeignKey(Banco,on_delete=models.CASCADE)
     tipo= models.ForeignKey(Tipo,on_delete=models.CASCADE)
 
