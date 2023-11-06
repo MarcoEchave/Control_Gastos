@@ -14,7 +14,7 @@ from .forms import FormConcepto, FormMovimiento
 def getConcepto(request):
     concepto = Concepto.objects.all()
     page = request.GET.get('page',1)
-    paginator = Paginator(concepto,5)
+    paginator = Paginator(concepto,10)
     concepto = paginator.page(page)
     return render(request,'concepto/getConcepto.html',{'concepto':concepto,'paginator':paginator})
 
@@ -77,10 +77,10 @@ def update_movimiento(request, pk):
         form = FormMovimiento(request.POST, instance=movimiento)
         if form.is_valid():
             form.save()
-            return redirect('getMovimiento')
+            return redirect('getMovimientos')
     else:
-        form = FormConcepto(instance=movimiento)
-    return render(request, 'movimiento/update-movimiento.html', {'form': form, 'movimiento': movimiento})
+        form = FormMovimiento(instance=movimiento)
+    return render(request, 'movimientos/update-movimiento.html', {'form': form, 'movimiento': movimiento})
 
 @login_required
 def eliminar_movimiento(request, pk):

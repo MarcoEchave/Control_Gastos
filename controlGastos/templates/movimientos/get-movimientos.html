@@ -2,7 +2,7 @@
 {% block cuerpo %}
 <a href="{%url 'createMovimientos'%}">Nuevo</a>
 {% if movimiento %}
-<<h1>Lista de Movimientos</h1>>
+<h1>Lista de Movimientos</h1>
 <table style="border:1">
     <thead>
         <tr>
@@ -22,7 +22,7 @@
             <td>{{e.monto}}</td>
             <td>{{e.banco}}</td>
             <td><a href="{% url 'deleteMovimientos' e.id%}">Eliminar</a></td>
-            <td><a href="">Editar</a></td>
+            <td><a href="{% url 'updateMovimientos' e.id%}">Editar</a></td>
         </tr>
         {% endfor %}
     </tbody>

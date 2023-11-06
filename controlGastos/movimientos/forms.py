@@ -7,7 +7,7 @@ class FormMovimiento(forms.ModelForm):
     class Meta:
         model = Movimiento
         fields = ('fecha',"id_concepto","monto","banco","tipo")
-        widgets = {"monto":forms.NumberInput(),"fecha":forms.DateInput()}
+        widgets = {"monto":forms.NumberInput(),"fecha":forms.DateInput(attrs={'type': 'date'})}
 
 
 class FormConcepto(forms.ModelForm):

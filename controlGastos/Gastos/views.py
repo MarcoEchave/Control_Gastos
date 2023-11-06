@@ -7,7 +7,7 @@ from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator
 
 from .models import Banco,Tipo,Categoria
-
+from .managers import CategoriaManagers,BancoManagers,TipoaManagers
 from .forms import FormsCategoria,FormsTipo,FormsBanco
 
 # Create your views here.
@@ -130,3 +130,9 @@ def eliminar_categoria(request, pk):
         categoria.delete()
         return redirect('getCategoria')
     return render(request, 'categoria/delete-categoria.html', {'categoria': categoria})
+
+@login_required
+def filtrar_categoria(request, self):
+    palabra = self.request.GET.get("kword","")
+    filtro =CategoriaManagers.buscar_categoria(palabra)
+    return render(request,'categoria/filtro-categoria.html',{'filtro':filtro} )

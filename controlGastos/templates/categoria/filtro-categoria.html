@@ -1,0 +1,9 @@
+{% extends 'index.html' %}
+
+{% block cuerpo %}
+{% for e in filtro %}
+<li>{e.categoria}</li>
+
+{% endfor %}
+
+{% endblock cuerpo %}

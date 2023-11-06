@@ -12,4 +12,5 @@ urlpatterns = [
     path('create-movimientos',views.create_movimiento,name='createMovimientos'),
     path('update-movimientos/<pk>',views.update_movimiento,name='updateMovimientos'),
     path('delete-movimientos/<pk>',views.eliminar_movimiento,name='deleteMovimientos'),
+    
 ]

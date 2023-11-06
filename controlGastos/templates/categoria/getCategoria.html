@@ -2,6 +2,11 @@
 {% block cuerpo %}
 <a href="{%url 'createCategoria'%}">Nuevo</a>
 {% if categoria %}
+<form method="GET">{% csrf_token %}
+    <input type="text" id="kword" name="kword">
+    <input type=submit value="buscar">
+</form>
+
 <h1>Lista de Categorias</h1>
 <table style="border:1">
     <thead>

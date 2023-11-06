@@ -16,4 +16,5 @@ urlpatterns = [
     path('create-tipo',views.create_tipo ,name='createTipo'),
     path('update-tipo/<pk>',views.update_tipo,name='update-Tipo'),
     path('delete-tipo/<pk>',views.eliminar_tipo,name='delete-Tipo'),
+    path('filtro',views.filtrar_categoria,name='filtro-categoria'),
 ]
